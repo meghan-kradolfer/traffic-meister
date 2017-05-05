@@ -7,6 +7,14 @@ const getData = (data) => {
   }
 };
 
+export const addField = (field, value) => {
+  return {
+    type: 'ADD_FIELD',
+    field,
+    value
+  }
+};
+
 export const dispatchGetData = () => {
   return dispatch => {
     return trafficMeister
@@ -14,5 +22,4 @@ export const dispatchGetData = () => {
         return dispatch(getData(data))
       })
   };
-
 };

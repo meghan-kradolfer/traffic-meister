@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { dispatchGetData }  from '../redux/action';
+import { dispatchGetData, addField }  from '../redux/action';
 import { Header } from './Header/Header';
 import { Form } from './Form/Form';
 import { SideBar } from './SideBar/SideBar';
@@ -10,14 +10,23 @@ import './App.css';
 const mapStateToProps = (state) => {
   return {
     vehicles: state.data.vehicles,
-    vehicleTypes: state.data.vehicleTypes
+    vehicleTypes: state.data.vehicleTypes,
+    vehicleBrands: state.data.vehicleBrands,
+    vehicleColors: state.data.vehicleColors,
+    type: state.data.type,
+    brand: state.data.brand,
+    color: state.data.color,
+    loaded: state.data.loaded
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     dispatchGetData: () => {
       dispatch(dispatchGetData())
+    },
+    addField: (field, value) => {
+      dispatch(addField(field, value))
     }
   }
 };
@@ -27,12 +36,10 @@ class App extends Component {
     this.props.dispatchGetData();
   }
   handleSelectChange = (evt) => {
-    this.setState({
-      [evt.target.id]: evt.target.value
-    })
+    this.props.addField(evt.target.id, evt.target.value);
   };
   render() {
-    const loaded = true;
+    const { loaded } = this.props;
     return (
       <Grid>
         <Header />
