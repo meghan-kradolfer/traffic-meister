@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
-import trafficMeister from '../lib/service';
+import { dispatchGetData }  from '../redux/action';
 import { Header } from './Header/Header';
 import { Form } from './Form/Form';
 import { SideBar } from './SideBar/SideBar';
 import './App.css';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      vehicles: [],
-      vehicleTypes: [],
-      loaded: false
+const mapStateToProps = (state) => {
+  return {
+    vehicles: state.data.vehicles,
+    vehicleTypes: state.data.vehicleTypes
+  };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    dispatchGetData: () => {
+      dispatch(dispatchGetData())
     }
   }
-  componentDidMount() {
-    trafficMeister
-      .fetchData((err, data) => {
-        this.setState(
-          {
-            vehicles: data,
-            vehicleTypes: data.filter(function (pair) {
-              return (this[pair['type']] = (this[pair['type']] || 0) + 1) === 1;
-            }, {}),
-            loaded: true
-          }
-        )
-      });
+};
+
+class App extends Component {
+  componentWillMount() {
+    this.props.dispatchGetData();
   }
   handleSelectChange = (evt) => {
     this.setState({
@@ -35,7 +32,7 @@ class App extends Component {
     })
   };
   render() {
-    const { loaded } = this.state;
+    const loaded = true;
     return (
       <Grid>
         <Header />
@@ -45,11 +42,10 @@ class App extends Component {
         { loaded &&
         <Row>
           <Col md={6} >
-            <Form data={ this.state } handleSelectChange={this.handleSelectChange}/>
-
+            <Form data={ this.props } handleSelectChange={this.handleSelectChange}/>
           </Col>
           <Col md={6} >
-            <SideBar data={ this.state } />
+            <SideBar data={ this.props } />
           </Col>
         </Row>
         }
@@ -58,4 +54,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
