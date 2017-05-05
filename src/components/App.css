@@ -1,0 +1,9 @@
+.App-loading {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+@keyframes App-loading-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
