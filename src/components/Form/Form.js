@@ -2,55 +2,51 @@ import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import './Form.css';
 
-function FieldGroup({ id, label, options, name, onChange }) {
-  console.log(options);
-  const optionValid = options && options.length;
+function removeDups(a, b) {
+  return a.filter(function (pair) {
+    return b ? (this[pair[b]] = (this[pair[b]] || 0) + 1) === 1 : (this[pair] = (this[pair] || 0) + 1) === 1
+  }, {});
+}
+
+function FieldGroup({ id, label, options, onChange, props }) {
   return (
     <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
-      { optionValid &&
+      <ControlLabel>{label}</ControlLabel> {props.data[id]}
       <FormControl componentClass="select" onChange={onChange}>
-        <option value=''>Select...</option>
+        <option value=''>Select... {props.data[id]}</option>
         { options.map((option, key) => (
-          <option value={ option[name] ? option[name] : option } key={key} >{ option[name] ? option[name] : option }</option>
+          <option value={ option[id] ? option[id] : option } key={key} >{ option[id] ? option[id] : option }</option>
         ))}
       </FormControl>
-      }
-      { !optionValid &&
-      <FormControl componentClass="select" disabled>
-        <option value=''>Select...</option>
-      </FormControl>
-      }
     </FormGroup>
   );
 }
 
 export const Form = (props) => {
-  const { vehicleTypes, vehicleBrands, vehicleColors, type, brand, color } = props.data;
-  console.log(brand);
+  const { vehicles, vehicleTypes, vehicleBrands, vehicleColors, type, brand, color } = props.data;
   return (
     <form className="content">
       <div className="content-inner">
         <FieldGroup
           id="type"
           label="vehicle"
-          options={ vehicleTypes.filter(vehicle => (!brand || vehicle.brand === brand) && (!color|| vehicle.colors.indexOf(color) !== -1)) }
-          name="type"
+          options={ vehicleTypes.filter(vehicle => (!brand || vehicle.brand === brand) && (!color|| vehicle.colors.indexOf(color) !== -1) ) }
           onChange={props.handleSelectChange}
+          props={props}
         />
         <FieldGroup
           id="brand"
           label="brand"
-          options={vehicleBrands.filter(vehicle => (!type || vehicle.type === type) &&  (!color || vehicle.colors.indexOf(color) !== -1))}
-          name="brand"
+          options={vehicleBrands.filter(vehicle => (!type || vehicle.type === type) && (!color|| vehicle.colors.indexOf(color) !== -1) )}
           onChange={props.handleSelectChange}
+          props={props}
         />
         <FieldGroup
           id="color"
           label="color"
           options={vehicleColors.filter(vehicle => (!type || vehicle.type === type) && (!brand || vehicle.brand === brand))}
-          name="colors"
           onChange={props.handleSelectChange}
+          props={props}
         />
       </div>
     </form>
