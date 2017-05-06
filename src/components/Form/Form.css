@@ -1,7 +1,24 @@
-.Form {
-
+.Form-row {
+    padding-bottom: 34px;
 }
 
-.Form-inner {
+.Form-label {
+    width: 100%;
+    font-size: 20px;
+}
 
+.Form-select {
+    outline: none!important;
+    cursor: pointer;
+    width: 100%;
+    border: 2px solid #000000;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1;
+    border-radius: 1px;
+    background: url('../../assets/icon.png') no-repeat right;
+    -webkit-background-size:30px;
+    background-size:30px;
+    -webkit-appearance: none;
 }
