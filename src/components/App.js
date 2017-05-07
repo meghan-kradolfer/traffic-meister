@@ -40,7 +40,7 @@ class App extends Component {
         this.props.addField(evt.target.id, evt.target.value);
     };
     render() {
-        const { loaded, vehicle, brand, color } = this.props;
+        const { loaded } = this.props;
         return (
             <Grid>
               <Header />
@@ -48,30 +48,13 @@ class App extends Component {
                 <img src={loading} className="App-loading" alt="Trafficmeister loading"/>
                 }
                 { loaded &&
-                <Row>
-                  <Col sm={6} className="mt-1">
+                <Row className="mb-1">
+                  <Col md={6} className="mt-1">
                     <Form data={ this.props } handleSelectChange={this.handleSelectChange}/>
                   </Col>
-                  <Col sm={6} className="mt-1">
+                  <Col md={6} className="mt-1">
                     <SideBar data={ this.props } />
                   </Col>
-                    <Col sm={12} className="mt-1 mb-1">
-                        <div className="content">
-                            <div className="content-inner">
-                                <Row className="App-summary" >
-                                    <Col sm={4}>
-                                        <h4 >Vehicle: <span>{vehicle ? vehicle : 'not selected'}</span> </h4>
-                                    </Col>
-                                    <Col sm={4}>
-                                        <h4>Brand: <span>{brand ? brand : 'not selected'}</span> </h4>
-                                    </Col>
-                                    <Col sm={4}>
-                                        <h4>Color: <span>{color ? color : 'not selected'}</span> </h4>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </div>
-                    </Col>
                 </Row>
                 }
             </Grid>

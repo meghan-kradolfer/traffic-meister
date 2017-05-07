@@ -6,13 +6,6 @@
   display:block;
 }
 
-.App-summary h4 span {
-  color: #DF6631;
-  text-transform: capitalize;
-  font-style: italic;
-  opacity: 0.8;
-}
-
 @keyframes App-loading-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

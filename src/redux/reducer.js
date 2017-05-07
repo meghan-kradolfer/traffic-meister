@@ -23,6 +23,7 @@ export const data = (state = initialState, action) => {
                     allVehicles[veh.type].brand.push(veh.brand);
                     veh.colors.map(color => allVehicles[veh.type].colors.push(color));
                 }
+                return action.data;
             });
             action.data.map(veh => {
                 if(!allBrands[veh.brand]) {
@@ -34,6 +35,7 @@ export const data = (state = initialState, action) => {
                     allBrands[veh.brand].vehicle.push(veh.type);
                     veh.colors.map(color => allBrands[veh.brand].colors.push(color));
                 }
+                return action.data;
             });
             action.data.map(veh => {
                 veh.colors.map(color => {
@@ -46,7 +48,9 @@ export const data = (state = initialState, action) => {
                         allColors[color].vehicle.push(veh.type);
                         allColors[color].brand.push(veh.brand);
                     }
+                    return veh.colors;
                 });
+                return action.data;
             });
             return {
                 ...state,
