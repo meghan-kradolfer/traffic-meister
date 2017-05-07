@@ -1,9 +1,9 @@
 const initialState = {
-    allVehicles: [],
-    allTypes: {},
+    data: [],
+    allVehicles: {},
     allBrands: {},
     allColors: {},
-    type: false,
+    vehicle: false,
     brand: false,
     color: false,
     loaded: false
@@ -12,26 +12,26 @@ const initialState = {
 export const data = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_DATA':
-            const { allTypes, allBrands, allColors } = state;
+            const { allVehicles, allBrands, allColors } = state;
             action.data.map(veh => {
-                if(!allTypes[veh.type]) {
-                    allTypes[veh.type] = {
+                if(!allVehicles[veh.type]) {
+                    allVehicles[veh.type] = {
                         brand: [veh.brand],
                         colors: veh.colors.map(color => color)
                     };
                 } else {
-                    allTypes[veh.type].brand.push(veh.brand);
-                    veh.colors.map(color => allTypes[veh.type].colors.push(color));
+                    allVehicles[veh.type].brand.push(veh.brand);
+                    veh.colors.map(color => allVehicles[veh.type].colors.push(color));
                 }
             });
             action.data.map(veh => {
                 if(!allBrands[veh.brand]) {
                     allBrands[veh.brand] = {
-                        type: [veh.type],
+                        vehicle: [veh.type],
                         colors: veh.colors.map(color => color)
                     };
                 } else {
-                    allBrands[veh.brand].type.push(veh.type);
+                    allBrands[veh.brand].vehicle.push(veh.type);
                     veh.colors.map(color => allBrands[veh.brand].colors.push(color));
                 }
             });
@@ -39,18 +39,18 @@ export const data = (state = initialState, action) => {
                 veh.colors.map(color => {
                     if(!allColors[color]) {
                         allColors[color] = {
-                            type: [veh.type],
+                            vehicle: [veh.type],
                             brand: [veh.brand]
                         };
                     } else {
-                        allColors[color].type.push(veh.type);
+                        allColors[color].vehicle.push(veh.type);
                         allColors[color].brand.push(veh.brand);
                     }
                 });
             });
             return {
                 ...state,
-                allVehicles: action.data,
+                data: action.data,
                 loaded: true
             };
         case 'ADD_FIELD':

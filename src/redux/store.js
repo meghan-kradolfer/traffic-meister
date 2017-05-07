@@ -6,7 +6,6 @@ const trafficMeister = combineReducers({
   data
 });
 
-
 const store = createStore(trafficMeister,
   compose(applyMiddleware(thunk))
 );

@@ -1,6 +1,16 @@
 .App-loading {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-loading-spin infinite 20s linear;
   height: 80px;
+  margin: 20px auto;
+  width: 50px;
+  display:block;
+}
+
+.App-summary h4 span {
+  color: #DF6631;
+  text-transform: capitalize;
+  font-style: italic;
+  opacity: 0.8;
 }
 
 @keyframes App-loading-spin {

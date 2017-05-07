@@ -21,4 +21,5 @@
     -webkit-background-size:30px;
     background-size:30px;
     -webkit-appearance: none;
+    text-transform: capitalize;
 }

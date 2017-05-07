@@ -4,7 +4,10 @@
 
 .SideBar-img {
     opacity: 0.3;
-    height: 100px;
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .SideBar-img.active {

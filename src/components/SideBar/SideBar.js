@@ -3,14 +3,16 @@ import { Row, Col } from 'react-bootstrap';
 import './SideBar.css';
 
 export const SideBar = (props) => {
-  const { type, brand, color, allVehicles } = props.data;
+  const { data, brand, color, vehicle } = props.data;
   return (
     <div className="content">
       <div className="content-inner">
         <Row>
-            { allVehicles.map(vehicle => (
-                <Col md={3} key={vehicle.id} className={`SideBar-img ${(!type || vehicle.type === type) && (!brand || vehicle.brand === brand) && (!color || vehicle.colors.indexOf(color) !== -1) ? 'active' : ''}`}>
-                  <img src={vehicle.img} alt={`${vehicle.type}, ${vehicle.brand}`} />
+            { data.map(veh => (
+                <Col md={4} xs={6} key={veh.id} className="mb-2">
+                    <div style={{backgroundImage: `url(${veh.img})`}}
+                        className={`SideBar-img  ${(!vehicle || veh.type === vehicle) && (!brand || veh.brand === brand) && (!color || veh.colors.indexOf(color) !== -1) ? 'active' : ''}`}>
+                    </div>
                 </Col>
             ))}
         </Row>
