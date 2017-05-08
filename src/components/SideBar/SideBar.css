@@ -1,15 +1,15 @@
 .SideBar {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .SideBar-img {
-    opacity: 0.3;
-    height: 70px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  opacity: 0.3;
+  height: 70px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .SideBar-img.active {
-    opacity: 1;
+  opacity: 1;
 }
